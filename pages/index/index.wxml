@@ -1,4 +1,5 @@
 <View class="title">
+
 	<View class="score">
 		<View class="scoreNum">
 			<Text class="item titleItem">SCORE</Text>
@@ -6,8 +7,8 @@
 		</View>
 	</View>
 
-		<Button class="restart center" bindtap="reset" plain="YES">
-			<Image src="../../images/restart.png"></Image>
+		<Button class="restart center" bindtap="reset" plain="YES"  bindlongpress="changeSurperise">
+			RESET
 		</Button>
 
 	<View class="personBest">
@@ -23,9 +24,16 @@
 		<Text class="item contentItem" id="current_score">{{current_score}}</Text>
 		<button bindtap="reset">重新开始</button>
 	</modal>
+
+	
+
 </View>
 
-<!-- View.chessboard>View.row*4>View.column*4 -->
+<modal title="BUPT" hidden="{{ this.data.surprise }}" class="surprisecss">
+	<view>祝老师以后平安喜乐,万事顺意!</view>
+	<button bindtap="reset">Best wish to you</button>
+</modal>
+
 
 <View class="chessboard" catchtouchstart="touchstart" catchtouchend="touchend">
 	<View class="row" wx:for="{{chessboardDatas}}" wx:for-index="idx" wx:for-item="chessboardColumn">
@@ -48,7 +56,7 @@
 	</Button>
 </View>
 
-<View class="tips center">ps: 合并数字得到一个2048！</View>
+<View class="tips center">ps: 合并数字得到一个2048！from 京海市刑侦支队</View>
 
 <toast hidden="{{toast2Hidden}}" duration="1500" bindchange="reset">
 	您已通关

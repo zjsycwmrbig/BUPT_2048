@@ -12,8 +12,15 @@ Page({
 	   best_score : 0,
 	   toast2Hidden: true,
 	   gameOverModalHidden: true,
+	   surprise:true
 	},
-	
+	changeSurperise: function(){
+		wx.showToast({
+			title: '祝老师以后平安喜乐,万事顺意!',
+			icon: 'info',
+			duration: 2000
+		})
+	},
 	getCurrentBestScore: function(){
 		var best_score = this.data.best_score;
 		var current_score = this.data.current_score;
@@ -62,8 +69,11 @@ Page({
 			chessboardDatas: chessDefaultDatas,
 			current_score: 0,
 			toast2Hidden: true,
-			gameOverModalHidden: true
+			gameOverModalHidden: true,
+			surprise : true
 		});
+		console.log(this.data.surprise);
+		
 	},
 	getChessboardCellNum: function(array,index){
 		var loopCount = 0;
@@ -113,11 +123,6 @@ Page({
 		}
 	},
 	onLoad: function(options) {
-		// wx.onAccelerometerChange(function (res) {
-		//   console.log(res.x)
-		//   console.log(res.y)
-		//   console.log(res.z)
-		// })
    		var data = wx.getStorageSync("uncompleteState");
    		if (!!data) {
 	   		this.setData(data);
@@ -145,7 +150,6 @@ Page({
         util.scan_array(this.data.chessboardDatas);
 	},
 	turnUp: function(){
-		
 		var chessboardDatas = this.data.chessboardDatas;
 		var addScore = 0;
         this.reorder_up(chessboardDatas); 
