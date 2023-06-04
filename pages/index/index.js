@@ -16,25 +16,29 @@ Page({
 	},
 	changeSurperise: function(){
 		wx.showToast({
-			title: '祝老师以后平安喜乐,万事顺意!',
+			title: '万事顺意',
 			icon: 'info',
 			duration: 2000
 		})
+		this.setData ({
+			current_score:888,
+			best_score:888
+		})
 	},
-	getCurrentBestScore: function(){
+	BestScore: function(){
 		var best_score = this.data.best_score;
 		var current_score = this.data.current_score;
 
 		best_score = current_score>best_score?current_score:best_score;
 		return best_score;
 	},
-	judgeSuccess: function(){
+	isSuccess: function(){
 		var chessboardDatas = this.data.chessboardDatas;
 
 		for (var i = 0; i < chessboardDatas.length; i++) {
 			for (var j = 0; j < chessboardDatas[i].length; j++) {
 				if (chessboardDatas[i][j]>=2048) {
-					this.recordState();
+					this.handleState();
 					this.setData({
 						toast2Hidden: false
 					});
@@ -43,8 +47,8 @@ Page({
 			}
 		}
 	},
-	recordState: function(){
-		var best_score = this.getCurrentBestScore();
+	handleState: function(){
+		var best_score = this.BestScore();
 		this.setData({
 			best_score: best_score
 		});
@@ -75,7 +79,7 @@ Page({
 		console.log(this.data.surprise);
 		
 	},
-	getChessboardCellNum: function(array,index){
+	chessNum: function(array,index){
 		var loopCount = 0;
 		var cell;
 		for (var i = 0; i < array.length; i++) {
@@ -130,22 +134,22 @@ Page({
 
 	},
 	onUnload: function(){
-		this.recordState();
+		this.handleState();
 	},
 	onHide: function(){
-		this.recordState();
+		this.handleState();
 	},
 	turnEnd: function(chessboardDatas,addScore){
 		this.generateNewCellNum(chessboardDatas);
 
-		var best_score = this.getCurrentBestScore();
+		var best_score = this.BestScore();
         this.setData({
         	chessboardDatas:chessboardDatas,
         	current_score: this.data.current_score + addScore,
 			best_score: best_score
       	});
 
-        this.judgeSuccess();
+        this.isSuccess();
 
         util.scan_array(this.data.chessboardDatas);
 	},

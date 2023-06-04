@@ -5,7 +5,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fd9995",
-    "navigationBarTitleText": "2048",
+    "navigationBarTitleText": "BUPT_2048",
     "navigationBarTextStyle":"black"
   }
 }
